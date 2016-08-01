@@ -11,7 +11,7 @@ impute = Imputer()
 Default Usage (`X` should be a pandas.dataframe, column is the name or index of the dataframe):
 
 ```python
-X_imputed = impute.knn(X = data, column = 0)
+X_imputed = impute.knn(X = data, column = 0)#default 10nn
 ```
 
 Change Number of *k*:
