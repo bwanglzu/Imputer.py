@@ -5,6 +5,7 @@ A python implementation for missing value imputation using kNN.
 Require Scikit-learn, Numpy and Pandas installed. Initialise:
 
 ```python
+from imputer import Imputer
 impute = Imputer()
 ```
 
