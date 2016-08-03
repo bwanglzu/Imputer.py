@@ -21,7 +21,7 @@ Change Number of *k*:
 X_imputed = impute.knn(X = data, column = 'age', k = 3)
 ```
 
-Default impute for continus features, for categorical feature imputation:
+Default impute for numerical features, for categorical feature imputation:
 
 ```python
 X_imputed = impute.knn(X = data, column = 'gender', k = 10, is_categorical = True)
