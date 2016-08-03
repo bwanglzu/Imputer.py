@@ -11,19 +11,19 @@ impute = Imputer()
 Default Usage (`X` should be a pandas.dataframe, column is the name or index of the dataframe):
 
 ```python
-X_imputed = impute.knn(X = data, column = 0)#default 10nn
+X_imputed = impute.knn(X = data, column = 'age')#default 10nn
 ```
 
 Change Number of *k*:
 
 ```python
-X_imputed = impute.knn(X = data, column = 0, k = 3)
+X_imputed = impute.knn(X = data, column = 'age', k = 3)
 ```
 
 Default impute for continus features, for categorical feature imputation:
 
 ```python
-X_imputed = impute.knn(X = data, column = 1, k = 10, is_categorical = True)
+X_imputed = impute.knn(X = data, column = 'gender', k = 10, is_categorical = True)
 ```
 
 ## Reference
