@@ -41,7 +41,8 @@ class Imputer:
 		X_test = X_test.fillna(X_test.mean())
 		#predict missing values
 		y_test = clf.predict(X_test)
-		X.ix[missing_idx,column]=y_test
+		column_idx = X.columns.get_loc(column)
+		X.ix[missing_idx,column_idx]=y_test
 		return X 
 
 	def knn(self, X, column, k=10, is_categorical = False):
