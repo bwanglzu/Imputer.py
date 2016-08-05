@@ -26,7 +26,11 @@ class Imputer:
 		X_copy = np.delete(X, missing_idxes, 0)
 		X_train = np.delete(X_copy, column, 1)
 		#if other columns still have missing values fill with mean
-		col_mean = np.nanmean(X, 0)
+		col_mean = None
+		if !is_categorical:
+			col_mean = np.nanmean(X, 0)
+		else:
+			col_mean = np.nanmedian(X, 0)
 		for col_id in xrange(0,len(col_mean)-1):
 			col_missing_idxes = np.where(np.isnan(X_train[:,col_id]))[0]
 			if len(col_missing_idxes)==0:
@@ -51,7 +55,11 @@ class Imputer:
 		X_test = X[missing_idxes,:]
 		X_test = np.delete(X_test, column, 1)
 		#if other columns still have missing values fill with mean
-		col_mean = np.nanmean(X, 0)
+		col_mean = None
+		if !is_categorical:
+			col_mean = np.nanmean(X, 0)
+		else:
+			col_mean = np.nanmedian(X,0)
 		#fill missing values in each column with current col_mean
 		for col_id in xrange(0,len(col_mean)-1):
 			col_missing_idxes = np.where(np.isnan(X_test[:,col_id]))[0]
