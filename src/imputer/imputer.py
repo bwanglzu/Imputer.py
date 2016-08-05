@@ -6,8 +6,8 @@ class Imputer:
 	def fit(self, X, column, k=10, is_categorical = False):
 		"""Fit a knn classifier for missing column
 		Args:
-			X(pandas.dataframe): dataframe
-			column(str): column name to be imputed
+			X(numpy.ndarray): input data
+			column(int): column id to be imputed
 			k(int): number of nearest neighbors, default 10
 			is_categorical(boolean): is continuous or categorical feature
 		Returns:
@@ -19,30 +19,47 @@ class Imputer:
 		else:
 			clf = neighbors.KNeighborsClassifier(n_neighbors=k)
 		#use column not null to train the kNN classifier
-		X_copy = X[pd.notnull(X[column])]
-		X_train = X_copy.drop(column,1)
+		missing_idxes = np.where(np.isnan(X[:,column]))[0]
+		X_copy = np.delete(X, missing_idxes, 0)
+		X_train = np.delete(X_copy, column, 1)
 		#if other columns still have missing values fill with mean
-		X_train = X_train.fillna(X_train.mean()).as_matrix()
-		y_train = X_copy[column].values.flatten()
+		col_mean = np.nanmean(X, 0)
+		for col_id in xrange(0,len(col_mean)-1):
+			col_missing_idxes = np.where(np.isnan(X_train[:,col_id]))[0]
+			if len(col_missing_idxes)==0:
+				continue
+			else:
+				X_train[col_missing_idxes,col_id]=col_mean[col_id]
+		y_train = X_copy[:,column]
+		#fit classifier
 		clf.fit(X_train, y_train)
 		return clf
 
 	def transform(self, X, column, clf):
 		"""Impute missing values
 		Args:
-			X(pandas.dataframe): input dataframe 
-			column(str): name of column to be imputed 
+			X(numpy.ndarray): input numpy ndarray 
+			column(int): index of column to be imputed 
 			clf: pretrained classifier 
 		Returns:
 			X(pandas.dataframe): imputed dataframe
 		"""
-		missing_idx = X[column].index[X[column].apply(np.isnan)]
-		X_test = X.iloc[missing_idx].drop(column,1)
-		X_test = X_test.fillna(X_test.mean())
+		missing_idxes = np.where(np.isnan(X[:,column]))[0]
+		X_test = X[missing_idxes,:]
+		X_test = np.delete(X_test, column, 1)
+		#if other columns still have missing values fill with mean
+		col_mean = np.nanmean(X, 0)
+		#fill missing values in each column with current col_mean
+		for col_id in xrange(0,len(col_mean)-1):
+			col_missing_idxes = np.where(np.isnan(X_test[:,col_id]))[0]
+			#if no missing values for current column
+			if len(col_missing_idxes)==0:
+				continue
+			else:
+				X_test[col_missing_idxes,col_id]=col_mean[col_id]
 		#predict missing values
 		y_test = clf.predict(X_test)
-		column_idx = X.columns.get_loc(column)
-		X.ix[missing_idx,column_idx]=y_test
+		X[missing_idxes,column]=y_test
 		return X 
 
 	def knn(self, X, column, k=10, is_categorical = False):
@@ -55,9 +72,30 @@ class Imputer:
 		Returns:
 			X_imputed(pandas.dataframe): imputed pandas dataframe
 		"""
+		X, column = self.check_X_y(X, column)
 		clf = self.fit(X, column, k, is_categorical)
 		X_imputed = self.transform(X, column, clf)
 		return X_imputed
+
+	def check_X_y(self, X, column):
+		"""Check input, if pandas.dataframe, transform to numpy array
+		Args:
+			X(ndarray/pandas.dataframe): input instances 
+			column(str/int): column index or column name
+		Returns:
+			X(ndarray): input instances 
+		"""
+		column_idx = None
+		if isinstance(X, pd.core.frame.DataFrame):
+			if isinstance(column, str):
+				#get index of current column
+				column_idx = X.columns.get_loc(column)
+			else:
+				column_idx = column
+			X = X.as_matrix()
+		return X,column_idx
+				
+
 
 
 
