@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 import pandas as pd
 from sklearn import neighbors
@@ -20,6 +21,8 @@ class Imputer:
 			clf = neighbors.KNeighborsClassifier(n_neighbors=k)
 		#use column not null to train the kNN classifier
 		missing_idxes = np.where(np.isnan(X[:,column]))[0]
+		if len(missing_idxes) == 0:
+			sys.exit()
 		X_copy = np.delete(X, missing_idxes, 0)
 		X_train = np.delete(X_copy, column, 1)
 		#if other columns still have missing values fill with mean
@@ -93,6 +96,8 @@ class Imputer:
 			else:
 				column_idx = column
 			X = X.as_matrix()
+		else:
+			column_idx = column
 		return X,column_idx
 				
 
