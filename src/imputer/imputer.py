@@ -27,7 +27,7 @@ class Imputer:
 		X_train = np.delete(X_copy, column, 1)
 		#if other columns still have missing values fill with mean
 		col_mean = None
-		if !is_categorical:
+		if not is_categorical:
 			col_mean = np.nanmean(X, 0)
 		else:
 			col_mean = np.nanmedian(X, 0)
@@ -42,12 +42,13 @@ class Imputer:
 		clf.fit(X_train, y_train)
 		return clf
 
-	def transform(self, X, column, clf):
+	def transform(self, X, column, clf, is_categorical):
 		"""Impute missing values
 		Args:
 			X(numpy.ndarray): input numpy ndarray 
 			column(int): index of column to be imputed 
 			clf: pretrained classifier 
+			is_categorical(boolean): is continuous or categorical feature
 		Returns:
 			X(pandas.dataframe): imputed dataframe
 		"""
@@ -56,7 +57,7 @@ class Imputer:
 		X_test = np.delete(X_test, column, 1)
 		#if other columns still have missing values fill with mean
 		col_mean = None
-		if !is_categorical:
+		if not is_categorical:
 			col_mean = np.nanmean(X, 0)
 		else:
 			col_mean = np.nanmedian(X,0)
@@ -85,7 +86,7 @@ class Imputer:
 		"""
 		X, column = self.check_X_y(X, column)
 		clf = self.fit(X, column, k, is_categorical)
-		X_imputed = self.transform(X, column, clf)
+		X_imputed = self.transform(X, column, clf, is_categorical)
 		return X_imputed
 
 	def check_X_y(self, X, column):
