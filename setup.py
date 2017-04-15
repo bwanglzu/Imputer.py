@@ -15,7 +15,7 @@ setup(
     keywords = "imputation kNN nearest neighbors",
     url = "https://github.com/bwanglzu/Imputer.py",
     packages=['imputer', 'tests'],
-    long_description=read('README'),
+    long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
