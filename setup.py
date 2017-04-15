@@ -14,7 +14,7 @@ setup(
     license = "BSD",
     keywords = "imputation kNN nearest neighbors",
     url = "https://github.com/bwanglzu/Imputer.py",
-    packages=['imputer', 'tests'],
+    packages=['src/imputer', 'tests'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
