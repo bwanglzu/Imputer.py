@@ -31,7 +31,7 @@ class Imputer:
 			col_mean = np.nanmean(X, 0)
 		else:
 			col_mean = np.nanmedian(X, 0)
-		for col_id in xrange(0,len(col_mean)-1):
+		for col_id in range(0,len(col_mean)-1):
 			col_missing_idxes = np.where(np.isnan(X_train[:,col_id]))[0]
 			if len(col_missing_idxes)==0:
 				continue
