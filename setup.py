@@ -11,14 +11,14 @@ setup(
     author = "Wang Bo",
     author_email = "kingbolanda@live.com",
     description = ("A python implementation of missing value imputation with kNN"),
-    license = "BSD",
+    license = "MIT",
     keywords = "imputation kNN nearest neighbors",
     url = "https://github.com/bwanglzu/Imputer.py",
-    packages=['src/imputer', 'example'],
+    packages=['imputer', 'example'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Topic :: Utilities",
-        "License :: OSI Approved :: BSD License",
+        'Topic :: Scientific/Engineering'
+        "License :: OSI Approved :: MIT License",
     ],
 )
