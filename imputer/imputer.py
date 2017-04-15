@@ -62,7 +62,7 @@ class Imputer:
 		else:
 			col_mean = np.nanmedian(X,0)
 		#fill missing values in each column with current col_mean
-		for col_id in xrange(0,len(col_mean)-1):
+		for col_id in range(0,len(col_mean)-1):
 			col_missing_idxes = np.where(np.isnan(X_test[:,col_id]))[0]
 			#if no missing values for current column
 			if len(col_missing_idxes)==0:
