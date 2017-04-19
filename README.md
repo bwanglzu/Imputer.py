@@ -2,6 +2,8 @@
 
 A python implementation for missing value imputation using kNN.
 
+[![CircleCI](https://circleci.com/gh/bwanglzu/Imputer.py.svg?style=shield&circle)](https://circleci.com/gh/bwanglzu/Imputer.py)
+
 ###Install
 
 ```
