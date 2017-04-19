@@ -1,5 +1,6 @@
 numpy>=1.12.1
 pandas>=0.19.2
+scipy>=0.19.0
 scikit-learn>=0.18.1
 flake8>=3.2.1
 flake8_docstrings>=1.0.2

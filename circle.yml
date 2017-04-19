@@ -7,7 +7,7 @@ machine:
 test:
   override:
     - nosetests --with-coverage
-    - flake8 ./ --exclude __init__.py --
   post:
+    - "flake8 ./ --exclude __init__.py,build"
     - coverage xml
     - codecov

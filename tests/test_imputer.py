@@ -2,7 +2,7 @@ import unittest
 
 import sys
 sys.path.append('..')
-from imputer.imputer import Imputer()
+from imputer.imputer import Imputer
 
 class TestImputer(unittest.TestCase):
 	def test_imputer(self):
