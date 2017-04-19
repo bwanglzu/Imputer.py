@@ -8,7 +8,7 @@ from sklearn import neighbors
 class Imputer:
     """Imputer class."""
 
-    def fit(self, X, column, k=10, is_categorical=False):
+    def _fit(self, X, column, k=10, is_categorical=False):
         """Fit a knn classifier for missing column.
 
         - Args:
@@ -47,7 +47,7 @@ class Imputer:
         clf.fit(X_train, y_train)
         return clf
 
-    def transform(self, X, column, clf, is_categorical):
+    def _transform(self, X, column, clf, is_categorical):
         """Impute missing values.
 
         - Args:
@@ -91,12 +91,12 @@ class Imputer:
         - Returns:
                 X_imputed(pandas.dataframe): imputed pandas dataframe
         """
-        X, column = self.check_X_y(X, column)
-        clf = self.fit(X, column, k, is_categorical)
-        X_imputed = self.transform(X, column, clf, is_categorical)
+        X, column = self._check_X_y(X, column)
+        clf = self._fit(X, column, k, is_categorical)
+        X_imputed = self._transform(X, column, clf, is_categorical)
         return X_imputed
 
-    def check_X_y(self, X, column):
+    def _check_X_y(self, X, column):
         """Check input, if pandas.dataframe, transform to numpy array.
 
         - Args:
