@@ -8,6 +8,5 @@ test:
   override:
     - nosetests --with-coverage
   post:
-    - flake8 ./ --exclude __init__.py --ignore=E402
     - coverage xml
     - codecov
