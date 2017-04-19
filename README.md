@@ -4,7 +4,7 @@ A python implementation for missing value imputation using kNN.
 
 [![CircleCI](https://circleci.com/gh/bwanglzu/Imputer.py.svg?style=shield&circle)](https://circleci.com/gh/bwanglzu/Imputer.py)
 
-###Install
+### Install
 
 ```
 git clone https://github.com/bwanglzu/Imputer.py.git
@@ -15,7 +15,7 @@ pip install -r requirements.txt
 python setup.py install
 ```
 
-###Usage
+### Usage
 
 ```python
 from imputer import Imputer
@@ -40,7 +40,7 @@ Default impute for numerical features, for categorical feature imputation:
 X_imputed = impute.knn(X = data, column = 'gender', k = 10, is_categorical = True)
 ```
 
-###Test
+### Test
 
 ```
 nosetests
