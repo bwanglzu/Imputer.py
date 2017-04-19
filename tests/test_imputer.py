@@ -1,4 +1,4 @@
-"""test imputer."""
+"""Test imputer."""
 import unittest
 import sys
 sys.path.append('..')
