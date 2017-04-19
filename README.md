@@ -44,7 +44,7 @@ X_imputed = impute.knn(X = data, column = 'gender', k = 10, is_categorical = Tru
 ### Test
 
 ```
-nosetests
+nosetests --with-coverage
 ```
 
 ## Reference
