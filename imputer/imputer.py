@@ -1,3 +1,4 @@
+"""Impute missing values with k nearest classifier."""
 import sys
 import numpy as np
 import pandas as pd
@@ -5,6 +6,7 @@ from sklearn import neighbors
 
 
 class Imputer:
+    """Imputer class."""
 
     def fit(self, X, column, k=10, is_categorical=False):
         """Fit a knn classifier for missing column.
