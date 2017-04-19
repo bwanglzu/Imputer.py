@@ -1,0 +1,13 @@
+deployment:
+  staging:
+    branch: dev
+machine:
+  python:
+    version: 2.7.12
+test:
+  override:
+    - nosetests --with-coverage
+    - flake8 ./ --exclude __init__.py --
+  post:
+    - coverage xml
+    - codecov
