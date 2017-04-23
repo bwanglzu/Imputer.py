@@ -27,7 +27,7 @@ class Imputer:
         # use column not null to train the kNN classifier
         missing_idxes = np.where(pd.isnull(X[:, column]))[0]
         if len(missing_idxes) == 0:
-            return X
+            sys.exit()
         X_copy = np.delete(X, missing_idxes, 0)
         X_train = np.delete(X_copy, column, 1)
         # if other columns still have missing values fill with mean
