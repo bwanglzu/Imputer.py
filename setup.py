@@ -21,7 +21,7 @@ setup(
     license="MIT",
     keywords="imputation kNN nearest neighbors",
     url="https://github.com/bwanglzu/Imputer.py",
-    packages=['imputer', 'example'],
+    packages=['imputer'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Alpha",
