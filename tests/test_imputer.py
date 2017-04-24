@@ -26,7 +26,7 @@ class TestImputer(unittest.TestCase):
         self.assertIsInstance(impute_first_column, np.ndarray)
         self.assertIsInstance(impute_eighth_column, np.ndarray)
         # column has no missing values
-        impute_first_column = impute.knn(X, 0)
+        impute_first_column = impute.knn(impute_first_column, 0)
         self.assertIsNotNone(impute_first_column)
         self.assertIsInstance(impute_first_column, np.ndarray)
         # user specify a column name

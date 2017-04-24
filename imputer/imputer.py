@@ -27,7 +27,7 @@ class Imputer:
         # use column not null to train the kNN classifier
         missing_idxes = np.where(pd.isnull(X[:, column]))[0]
         if len(missing_idxes) == 0:
-            sys.exit()
+            return None
         X_copy = np.delete(X, missing_idxes, 0)
         X_train = np.delete(X_copy, column, 1)
         # if other columns still have missing values fill with mean
@@ -93,8 +93,11 @@ class Imputer:
         """
         X, column = self._check_X_y(X, column)
         clf = self._fit(X, column, k, is_categorical)
-        X_imputed = self._transform(X, column, clf, is_categorical)
-        return X_imputed
+        if clf is None:
+            return X
+        else:
+            X_imputed = self._transform(X, column, clf, is_categorical)
+            return X_imputed
 
     def _check_X_y(self, X, column):
         """Check input, if pandas.dataframe, transform to numpy array.
